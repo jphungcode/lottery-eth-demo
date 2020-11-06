@@ -1,13 +1,15 @@
 import Head from 'next/head'
 import {useEffect, useState, useRef} from 'react'
+import Web3 from "web3";
+import Web3Modal from "web3modal";
+
+
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 import Lottery from "../contracts/Lottery.json";
-
-import getWeb3 from "../scripts/web3";
 
 export default function Home() {
 
@@ -35,8 +37,9 @@ export default function Home() {
   
   async function listenMMAccount() {
     if(window.ethereum){
-      window.ethereum.on("accountsChanged", async function() {
-        document.location.reload()
+      window.ethereum.on("accountsChanged", async function(accounts) {
+        console.log(accounts)
+        setAccount(accounts[0])
       });
 
       window.ethereum.on('chainChanged', () => {
@@ -49,8 +52,20 @@ export default function Home() {
   async function loadWeb3() {
     try {
       // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+      // const web3 = await getWeb3();
+      const providerOptions = {
 
+      }
+    
+      const web3Modal = new Web3Modal({
+        network: "ropsten", // optional
+        cacheProvider: true, // optional
+        providerOptions // required
+      });
+      
+      const provider = await web3Modal.connect();
+      
+      const web3 = new Web3(provider);
 
       // Use web3 to get the user's accounts.
       const getAccounts = await web3.eth.getAccounts();
