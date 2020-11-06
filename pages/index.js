@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Lottery from "../contracts/Lottery.json";
 
-import getWeb3 from "./web3";
+import getWeb3 from "../scripts/web3";
 
 export default function Home() {
 
@@ -212,6 +212,7 @@ export default function Home() {
 
           <div className="w-full sm:w-1/2 md:w-1/2 bg-orange-200 rounded-md p-6"  >
           <h2 className='text-3xl font-bold text-center my-8 font-rubik'>DEGEN LOTTERY</h2>
+          <p className='text-center font-rubik'>Ropsten Network Only</p>
           <hr />
           <div className="flex flex-col items-center justify-between">
               <div className=" flex flex-col sm:flex-row items-center justify-between w-full">

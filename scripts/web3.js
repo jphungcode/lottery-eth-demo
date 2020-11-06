@@ -15,6 +15,8 @@ const getWeb3 = () =>
         } catch (error) {
           reject(error);
         }
+
+        
       }
       // Legacy dapp browsers...
       else if (window.web3) {
